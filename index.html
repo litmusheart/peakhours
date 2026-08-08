@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09c5df">
+  <meta name="description" content="A short peak-hours guide for store teams.">
+  <title></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Hebrew:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/restored-base.css">
+  <link rel="stylesheet" href="./assets/css/training-ui.css">
+  <link rel="stylesheet" href="./assets/css/multilingual.css">
+  <link rel="stylesheet" href="./assets/css/targeted.css">
+  <link rel="stylesheet" href="./assets/css/step-experience.css">
+</head>
+<body>
+  <div class="language-gate" id="languageGate" role="dialog" aria-modal="true">
+    <div class="language-gate__panel">
+      <p class="language-gate__eyebrow" data-i18n="meta.brand"></p>
+      <h2 id="languageGateTitle"></h2>
+      <div class="language-options" id="languageOptions"></div>
+    </div>
+  </div>
+
+  <button class="language-switcher" id="languageSwitcher" type="button" aria-haspopup="true"></button>
+  <div class="language-menu" id="languageMenu" hidden></div>
+
+  <div class="training-progress" id="trainingProgress" aria-live="polite">
+    <div class="training-progress__label"><b id="progressCount"></b><span id="progressTitle"></span></div>
+    <div class="training-progress__dots" id="progressDots" aria-hidden="true"></div>
+  </div>
+
+  <header class="hero training-screen" data-training-screen data-screen-label="meta.brand">
+    <div class="hero__glow"></div>
+    <div class="wrap hero__content">
+      <div class="eyebrow"><span>●</span> <span data-i18n="hero.duration"></span></div>
+      <p class="kicker" data-i18n="hero.kicker"></p>
+      <h1><span data-i18n="hero.peak"></span><br><span data-i18n="hero.hours"></span></h1>
+      <p class="hero__intro" data-i18n="hero.intro"></p>
+      <div class="hero__rule" data-i18n="hero.rule"></div>
+      <p class="hero__signature" data-i18n="signature"></p>
+      <a class="scroll-cue" href="#introduction"><span data-i18n="hero.start"></span><span>↓</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="introduction reveal training-screen" id="introduction" data-training-screen data-screen-label="introduction.heading">
+      <div class="wrap">
+        <p class="intro-kicker" data-i18n="introduction.heading"></p>
+        <p data-i18n="introduction.p1"></p>
+        <p data-i18n="introduction.p2"></p>
+        <p data-i18n="introduction.p3"></p>
+        <div class="intro-goal"><small data-i18n="introduction.goalLabel"></small><strong data-i18n="introduction.goal"></strong></div>
+      </div>
+    </section>
+
+    <section class="section reveal training-screen" id="ready" data-step-key="ready" data-training-screen data-screen-label="sections.ready.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.ready.step"></p>
+        <h2 data-i18n="sections.ready.title"></h2>
+        <div class="ready-flow" aria-label="" data-i18n-aria="sections.ready.flowLabel">
+          <div class="ready-flow__step ready-flow__cart"><span class="cart-doodle" aria-hidden="true"><i></i><b></b><b></b></span><strong data-i18n="sections.ready.cart"></strong></div>
+          <span class="ready-flow__arrow" aria-hidden="true">↓</span>
+          <div class="ready-flow__step"><strong data-i18n="sections.ready.area"></strong></div>
+          <span class="ready-flow__arrow" aria-hidden="true">↓</span>
+          <div class="ready-flow__step ready-flow__success"><strong data-i18n="sections.ready.ready"></strong><b aria-hidden="true">✓</b></div>
+        </div>
+        <p class="lead" data-i18n="sections.ready.lead"></p>
+      </div>
+    </section>
+
+    <section class="section reveal training-screen" data-step-key="ready" data-training-screen data-screen-label="sections.ready.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.ready.step"></p>
+        <h2 data-i18n="sections.ready.noteTitle"></h2>
+        <div class="note ready-exception"><strong><span aria-hidden="true">→</span> <span data-i18n="sections.ready.notReady"></span></strong><p data-i18n="sections.ready.note"></p></div>
+      </div>
+    </section>
+
+    <section class="section section--dark reveal training-screen" data-step-key="number" data-training-screen data-screen-label="sections.number.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.number.step"></p>
+        <h2 data-i18n="sections.number.title"></h2>
+        <p class="lead" data-i18n="sections.number.lead"></p>
+        <div class="number-permutations">
+          <div class="number-correct"><small data-i18n="sections.number.app"></small><b>726</b><strong>✓</strong></div>
+          <div class="number-wrong-group"><small data-i18n="sections.number.not"></small><div><b>762</b><b>267</b><b>276</b><b>627</b><b>672</b></div><strong>×</strong></div>
+        </div>
+        <p class="muted" data-i18n="sections.number.why"></p>
+      </div>
+    </section>
+
+    <section class="section reveal training-screen" data-step-key="writing" data-training-screen data-screen-label="sections.writing.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.writing.step"></p>
+        <h2 data-i18n="sections.writing.title"></h2>
+        <p class="lead" data-i18n="sections.writing.lead"></p>
+        <figure class="number-styles-reference"><img src="./assets/images/number-styles-reference.jpg" alt="" data-i18n-alt="photos.numberStyles"></figure>
+      </div>
+    </section>
+
+    <section class="section reveal training-screen" data-step-key="writing" data-training-screen data-screen-label="sections.writing.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.writing.step"></p>
+        <h2 data-i18n="sections.writing.question"></h2>
+        <div class="quiz" id="numberQuiz">
+          <img class="handwriting-quiz-photo" src="./assets/images/handwriting-939.jpg" alt="" data-i18n-alt="photos.handwriting939">
+          <div class="answers" id="handwritingAnswers"></div>
+          <p class="quiz__result" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--blue reveal training-screen" data-step-key="visible" data-training-screen data-screen-label="sections.visible.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.visible.step"></p>
+        <h2 data-i18n="sections.visible.title"></h2>
+        <p class="lead" data-i18n="sections.visible.lead"></p>
+        <div class="photo-grid real-photo-pair">
+          <figure class="comparison comparison--wrong"><figcaption data-i18n="labels.before"></figcaption><img src="./assets/images/photo-4.jpg" alt="" data-i18n-alt="photos.folded"></figure>
+          <figure class="comparison comparison--right"><figcaption data-i18n="labels.after"></figcaption><img src="./assets/images/photo-5.jpg" alt="" data-i18n-alt="photos.flat"></figure>
+        </div>
+        <p class="photo-rule" data-i18n="sections.visible.rule"></p>
+      </div>
+    </section>
+
+    <section class="section reveal training-screen" data-step-key="together" data-training-screen data-screen-label="sections.together.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.together.step"></p>
+        <h2 data-i18n="sections.together.title"></h2>
+        <div class="photo-grid real-photo-pair">
+          <figure class="comparison comparison--wrong"><figcaption data-i18n="labels.wrong"></figcaption><img src="./assets/images/photo-8.jpg" alt="" data-i18n-alt="photos.separate"></figure>
+          <figure class="comparison comparison--right"><figcaption data-i18n="labels.right"></figcaption><img src="./assets/images/photo-1.jpg" alt="" data-i18n-alt="photos.together"></figure>
+        </div>
+        <p class="lead" data-i18n="sections.together.lead"></p>
+        <p class="muted" data-i18n="sections.together.why"></p>
+      </div>
+    </section>
+
+    <section class="section reveal training-screen" data-step-key="together" data-training-screen data-screen-label="sections.together.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.together.step"></p>
+        <h2 data-i18n="sections.together.title"></h2>
+        <ul class="rules"><li><i>1</i><span data-i18n="sections.together.rule1"></span></li><li><i>2</i><span data-i18n="sections.together.rule2"></span></li></ul>
+        <div class="cold-rule"><span>❄️</span><strong data-i18n="sections.together.cold"></strong></div>
+      </div>
+    </section>
+
+    <section class="section section--dark reveal training-screen" data-step-key="done" data-training-screen data-screen-label="sections.done.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.done.step"></p>
+        <div class="not-equal"><span data-i18n="sections.done.packed"></span><b>≠</b><span data-i18n="sections.done.done"></span></div>
+        <div class="done-formula"><span data-i18n="sections.done.packed"></span><i>+</i><span data-i18n="sections.done.numbered"></span><i>+</i><span data-i18n="sections.done.stored"></span><i>=</i><strong data-i18n="sections.done.done"></strong></div>
+        <p class="lead" data-i18n="sections.done.lead"></p>
+        <figure class="single-photo done-photo"><img src="./assets/images/photo-2.jpg" alt="" data-i18n-alt="photos.finishedCarts"></figure>
+      </div>
+    </section>
+
+    <section class="section section--dark reveal training-screen" data-step-key="done" data-training-screen data-screen-label="sections.done.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.done.step"></p>
+        <h2 data-i18n="sections.done.minimumLabel"></h2>
+        <div class="minimum"><b data-i18n="sections.done.minimum"></b></div>
+        <p class="muted" data-i18n="sections.done.help"></p>
+      </div>
+    </section>
+
+    <section class="section reveal training-screen" data-step-key="carts" data-training-screen data-screen-label="sections.carts.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.carts.step"></p>
+        <h2 data-i18n="sections.carts.title"></h2>
+        <figure class="single-photo"><img src="./assets/images/photo-3.jpg" alt="" data-i18n-alt="photos.carts"></figure>
+        <p class="lead" data-i18n="sections.carts.lead"></p>
+        <div class="arrow-rule"><span data-i18n="sections.carts.empty"></span><b>→</b><strong data-i18n="sections.carts.destination"></strong></div>
+        <p class="muted" data-i18n="sections.carts.clear"></p>
+      </div>
+    </section>
+
+    <section class="section section--sand reveal training-screen" data-step-key="water" data-training-screen data-screen-label="sections.water.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.water.step"></p>
+        <h2 data-i18n="sections.water.title"></h2>
+        <p class="lead" data-i18n="sections.water.lead"></p>
+        <div class="photo-grid real-photo-pair">
+          <figure class="comparison comparison--wrong"><figcaption data-i18n="labels.wrong"></figcaption><img src="./assets/images/photo-6.jpg" alt="" data-i18n-alt="photos.waterLoose"></figure>
+          <figure class="comparison comparison--right"><figcaption data-i18n="labels.right"></figcaption><img src="./assets/images/photo-7.jpg" alt="" data-i18n-alt="photos.waterBag"></figure>
+        </div>
+        <p class="photo-rule" data-i18n="sections.water.rule"></p>
+      </div>
+    </section>
+
+    <section class="section reveal training-screen" data-step-key="listen" data-training-screen data-screen-label="sections.listen.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.listen.step"></p>
+        <h2 data-i18n="sections.listen.title"></h2>
+        <div class="sound"><span>)))</span><strong data-i18n="sections.listen.call"></strong></div>
+        <p class="lead" data-i18n="sections.listen.lead"></p>
+        <p class="muted" data-i18n="sections.listen.why"></p>
+      </div>
+    </section>
+
+    <section class="section checklist reveal training-screen" data-step-key="checklist" data-training-screen data-screen-label="sections.checklist.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.checklist.step"></p>
+        <h2 data-i18n="sections.checklist.title"></h2>
+        <ul id="finalChecklist"></ul>
+      </div>
+    </section>
+
+    <section class="section checklist reveal training-screen" data-step-key="checklist" data-training-screen data-screen-label="sections.checklist.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.checklist.step"></p>
+        <h2 data-i18n="sections.checklist.title"></h2>
+        <ul id="finalChecklistMore"></ul>
+        <div class="closing" data-i18n="sections.checklist.closing"></div>
+        <p class="end-mark" data-i18n="sections.checklist.done"></p>
+      </div>
+    </section>
+
+    <section class="knowledge-check training-screen" id="knowledgeCheck" data-training-screen data-screen-label="knowledge.step">
+      <div class="wrap">
+        <p class="step" data-i18n="knowledge.step"></p>
+        <h2 data-i18n="knowledge.title"></h2>
+        <p class="knowledge-check__intro" data-i18n="knowledge.intro"></p>
+        <div class="scenario-quiz" id="scenarioQuiz">
+          <div class="scenario-quiz__progress"><span id="questionCount"></span><span id="quizScore"></span></div>
+          <div class="scenario-quiz__bar"><span id="quizProgress"></span></div>
+          <div id="questionPanel"><h3 id="questionText"></h3><div class="scenario-answers" id="scenarioAnswers"></div><div class="answer-feedback" id="answerFeedback" aria-live="polite"></div><button class="next-question" id="nextQuestion" type="button"></button></div>
+          <div class="quiz-complete" id="quizComplete" hidden><strong id="finalScore"></strong><h3 data-i18n="knowledge.ready"></h3><div id="missedRules"></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <nav class="step-nav" id="stepNav" aria-label="Training navigation">
+    <button class="step-nav__button" id="previousScreen" type="button" aria-label="Previous screen">←</button>
+    <div class="step-nav__progress"><span id="screenCount"></span><div id="screenDots" aria-hidden="true"></div></div>
+    <button class="step-nav__button" id="nextScreen" type="button" aria-label="Next screen">→</button>
+  </nav>
+  <script src="./assets/js/translations.js"></script>
+  <script src="./assets/js/training.js"></script>
+</body>
+</html>
