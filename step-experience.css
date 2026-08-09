@@ -221,3 +221,42 @@ html,body{height:100%;overflow:hidden}
   margin:14px 0 0;
   transform:none;
 }
+
+/* Handwriting quiz: keep the photo inspectable, but secondary to the answers. */
+#numberQuiz .handwriting-quiz-photo{
+  width:min(78%,310px);
+  max-width:310px;
+  height:auto;
+  margin:0 auto;
+  object-fit:contain;
+}
+#numberQuiz .handwriting-quiz-instruction{
+  width:100%;
+  margin:18px 0 9px;
+  color:var(--ink);
+  font-size:.88rem;
+  font-weight:800;
+  line-height:1.3;
+  text-align:start;
+}
+#numberQuiz #handwritingAnswers{
+  direction:ltr;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin:0;
+  unicode-bidi:isolate;
+}
+#numberQuiz #handwritingAnswers button{
+  min-height:44px;
+  padding:9px 8px;
+  font-size:1.08rem;
+  line-height:1;
+  text-align:center;
+}
+@media(min-width:410px){
+  #numberQuiz #handwritingAnswers{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-height:700px){
+  #handwriting-quiz-screen{padding-top:56px}
+  #numberQuiz .handwriting-quiz-instruction{margin-top:16px}
+}

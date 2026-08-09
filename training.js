@@ -9,6 +9,7 @@ let missed = [];
 let answered = false;
 let selectedAnswer = null;
 let handwritingSelection = null;
+const handwritingCorrectIndex = 2;
 let celebrationPlayed = false;
 let reviewTargetIndex = null;
 
@@ -174,14 +175,14 @@ function renderHandwritingAnswers() {
       container.querySelectorAll('button').forEach((item) => item.classList.remove('selected'));
       button.classList.add('selected');
       handwritingSelection = index;
-      const isCorrect = index === 0;
+      const isCorrect = index === handwritingCorrectIndex;
       result.textContent = translations[currentLanguage].sections.writing.feedback[index];
       result.className = `quiz__result show ${isCorrect ? 'correct' : 'wrong'}`;
     });
     container.append(button);
     if (index === handwritingSelection) {
       button.classList.add('selected');
-      const isCorrect = index === 0;
+      const isCorrect = index === handwritingCorrectIndex;
       result.textContent = translations[currentLanguage].sections.writing.feedback[index];
       result.className = `quiz__result show ${isCorrect ? 'correct' : 'wrong'}`;
     }
