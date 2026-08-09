@@ -89,3 +89,61 @@ html,body{height:100%;overflow:hidden}
 [dir="rtl"] #previousScreen{grid-column:3;grid-row:1}
 [dir="rtl"] #nextScreen{grid-column:1;grid-row:1}
 [dir="rtl"] .step-nav__progress{grid-column:2;grid-row:1}
+
+/* The handwriting quiz must remain in normal flow. Keep this override in the
+   final-loaded stylesheet so the compact-screen image rules above cannot
+   collapse the image into the answer area. */
+#handwriting-quiz-screen{
+  align-items:start!important;
+  overflow-x:hidden;
+  overflow-y:auto;
+  padding-bottom:calc(104px + env(safe-area-inset-bottom));
+}
+#handwriting-quiz-screen>.wrap{
+  min-width:0;
+  margin-block:auto;
+}
+#numberQuiz{
+  position:static;
+  display:flex;
+  width:100%;
+  height:auto;
+  min-height:0;
+  flex-direction:column;
+  align-items:stretch;
+  gap:0;
+  overflow:visible;
+  transform:none;
+}
+#numberQuiz .handwriting-quiz-photo{
+  position:static;
+  display:block;
+  width:min(100%,420px);
+  max-width:100%;
+  height:auto;
+  max-height:none;
+  flex:0 0 auto;
+  margin:0 auto;
+  object-fit:contain;
+  transform:none;
+}
+#numberQuiz #handwritingAnswers{
+  position:static;
+  display:grid;
+  width:100%;
+  height:auto;
+  min-height:0;
+  grid-template-columns:1fr;
+  gap:10px;
+  margin:20px 0 0;
+  overflow:visible;
+  transform:none;
+}
+#numberQuiz .quiz__result{
+  position:static;
+  width:100%;
+  height:auto;
+  min-height:0;
+  margin:14px 0 0;
+  transform:none;
+}
