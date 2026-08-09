@@ -9,6 +9,8 @@ let missed = [];
 let answered = false;
 let selectedAnswer = null;
 let handwritingSelection = null;
+let celebrationPlayed = false;
+let reviewTargetIndex = null;
 
 const trainingSections = [...document.querySelectorAll('main .section')];
 const revealItems = [...document.querySelectorAll('.reveal')];
@@ -27,6 +29,9 @@ const previousScreen = document.querySelector('#previousScreen');
 const nextScreen = document.querySelector('#nextScreen');
 const screenCount = document.querySelector('#screenCount');
 const screenDots = document.querySelector('#screenDots');
+const quizReviewReturn = document.querySelector('#quizReviewReturn');
+const quizReviewContext = document.querySelector('#quizReviewContext');
+const backToQuizResults = document.querySelector('#backToQuizResults');
 let activeScreen = 0;
 let touchStartX = 0;
 let touchStartY = 0;
@@ -122,6 +127,8 @@ function applyLanguage(language) {
   updateScreenNavigation();
   if (quizComplete.hidden) renderQuestion(true);
   else renderCompletion();
+  quizReviewContext.textContent = copy.knowledge.fromQuiz;
+  backToQuizResults.textContent = copy.knowledge.backResults;
 }
 
 function renderHandwritingAnswers() {
@@ -228,6 +235,67 @@ const questionPanel = document.querySelector('#questionPanel');
 const quizComplete = document.querySelector('#quizComplete');
 const finalScore = document.querySelector('#finalScore');
 const missedRules = document.querySelector('#missedRules');
+const perfectScoreMessage = document.querySelector('#perfectScoreMessage');
+
+const reviewSections = {
+  'ready-to-pack': { titlePath:'sections.ready.step' },
+  'check-number': { titlePath:'sections.number.step' },
+  'write-clearly': { titlePath:'sections.writing.step' },
+  'number-visible': { titlePath:'sections.visible.step' },
+  'customer-name': { titlePath:'sections.customerName.step' },
+  'keep-order-together': { titlePath:'sections.together.step' },
+  'fridge-full': { titlePath:'sections.together.fridgeFull' },
+  'finished-order': { titlePath:'sections.done.step' },
+  carts: { titlePath:'sections.carts.step' },
+  water: { titlePath:'sections.water.step' },
+  diapers: { titlePath:'sections.diapers.title' },
+  'listen-help': { titlePath:'sections.listen.step' }
+};
+
+function getReviewTitle(sectionId) {
+  const value = getValue(translations[currentLanguage], reviewSections[sectionId].titlePath);
+  return value.includes('/') ? value.split('/').slice(1).join('/').trim() : value;
+}
+
+function removeCelebration() {
+  document.querySelector('#quizCelebration')?.remove();
+}
+
+function playPerfectScoreCelebration() {
+  if (celebrationPlayed || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  celebrationPlayed = true;
+  removeCelebration();
+  const layer = document.createElement('div');
+  layer.id = 'quizCelebration';
+  layer.className = 'quiz-celebration';
+  layer.setAttribute('aria-hidden', 'true');
+  const colors = ['#00c2e8', '#ffd166', '#f05b55', '#24a96b', '#ffffff'];
+  for (let burstIndex = 0; burstIndex < 3; burstIndex += 1) {
+    const burst = document.createElement('i');
+    burst.className = 'quiz-celebration__burst';
+    burst.style.setProperty('--x', `${20 + burstIndex * 30}%`);
+    burst.style.setProperty('--y', `${22 + (burstIndex % 2) * 20}%`);
+    burst.style.setProperty('--delay', `${burstIndex * 0.22}s`);
+    for (let sparkIndex = 0; sparkIndex < 12; sparkIndex += 1) {
+      const spark = document.createElement('b');
+      spark.style.setProperty('--angle', `${sparkIndex * 30}deg`);
+      spark.style.setProperty('--color', colors[(sparkIndex + burstIndex) % colors.length]);
+      burst.append(spark);
+    }
+    layer.append(burst);
+  }
+  for (let index = 0; index < 22; index += 1) {
+    const piece = document.createElement('span');
+    piece.className = 'quiz-celebration__piece';
+    piece.style.setProperty('--left', `${(index * 37) % 100}%`);
+    piece.style.setProperty('--delay', `${(index % 8) * 0.08}s`);
+    piece.style.setProperty('--drift', `${((index % 5) - 2) * 28}px`);
+    piece.style.setProperty('--color', colors[index % colors.length]);
+    layer.append(piece);
+  }
+  document.body.append(layer);
+  window.setTimeout(() => layer.remove(), 3400);
+}
 
 function resetKnowledgeCheck() {
   currentQuestion = 0;
@@ -235,6 +303,11 @@ function resetKnowledgeCheck() {
   missed = [];
   answered = false;
   selectedAnswer = null;
+  celebrationPlayed = false;
+  reviewTargetIndex = null;
+  removeCelebration();
+  quizReviewReturn.hidden = true;
+  perfectScoreMessage.hidden = true;
   if (questionPanel) questionPanel.hidden = false;
   if (quizComplete) quizComplete.hidden = true;
 }
@@ -244,7 +317,7 @@ function renderQuestion(preserveAnswer = false) {
   const copy = translations[currentLanguage].knowledge;
   const item = copy.questions[currentQuestion];
   questionCount.textContent = format(copy.question, {current:currentQuestion + 1,total:copy.questions.length});
-  quizScore.textContent = format(copy.score, {score});
+  quizScore.textContent = `${score}/${copy.questions.length}`;
   quizProgress.style.width = `${((currentQuestion + 1) / copy.questions.length) * 100}%`;
   questionText.textContent = item.q;
   scenarioAnswers.replaceChildren();
@@ -289,7 +362,7 @@ function selectAnswer(selectedIndex) {
   const isCorrect = selectedIndex === item.correct;
   if (isCorrect) score += 1;
   else { buttons[selectedIndex].classList.add('incorrect'); missed.push({question:currentQuestion}); }
-  quizScore.textContent = format(copy.score, {score});
+  quizScore.textContent = `${score}/${copy.questions.length}`;
   answerFeedback.textContent = `${isCorrect ? copy.correct : copy.incorrect} ${item.rule}`;
   answerFeedback.className = `answer-feedback show ${isCorrect ? 'correct' : 'incorrect'}`;
   nextQuestion.textContent = currentQuestion === copy.questions.length - 1 ? copy.result : copy.continue;
@@ -304,19 +377,47 @@ nextQuestion.addEventListener('click', () => {
 
 function renderCompletion() {
   const copy = translations[currentLanguage].knowledge;
-  finalScore.textContent = `${score} / ${copy.questions.length}`;
+  finalScore.textContent = `${score}/${copy.questions.length}`;
   missedRules.replaceChildren();
-  if (missed.length) {
+  const isPerfect = score === copy.questions.length;
+  perfectScoreMessage.hidden = !isPerfect;
+  perfectScoreMessage.textContent = isPerfect ? copy.perfect : '';
+  if (isPerfect) playPerfectScoreCelebration();
+  if (!isPerfect) {
     const heading = document.createElement('p');
+    heading.className = 'missed-rules__heading';
     heading.textContent = copy.review;
     missedRules.append(heading);
-    missed.forEach(({question}) => {
-      const line = document.createElement('p');
-      line.textContent = copy.questions[question].label;
-      missedRules.append(line);
+    const sectionIds = [...new Set(missed.map(({question}) => copy.questions[question].relatedSection))];
+    sectionIds.forEach((sectionId) => {
+      const title = getReviewTitle(sectionId);
+      const link = document.createElement('button');
+      link.type = 'button';
+      link.className = 'missed-rule-link';
+      link.textContent = title;
+      link.setAttribute('aria-label', format(copy.reviewLinkLabel, {title}));
+      link.addEventListener('click', () => openQuizReviewSection(sectionId));
+      missedRules.append(link);
     });
   }
 }
+
+function openQuizReviewSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  const targetIndex = trainingScreens.indexOf(section);
+  if (targetIndex < 0) return;
+  reviewTargetIndex = targetIndex;
+  quizReviewContext.textContent = translations[currentLanguage].knowledge.fromQuiz;
+  backToQuizResults.textContent = translations[currentLanguage].knowledge.backResults;
+  showScreen(targetIndex, targetIndex < activeScreen ? -1 : 1);
+}
+
+backToQuizResults.addEventListener('click', () => {
+  reviewTargetIndex = null;
+  quizReviewReturn.hidden = true;
+  showScreen(trainingScreens.indexOf(document.querySelector('#knowledgeCheck')), 1);
+  renderCompletion();
+});
 
 function updateScreenNavigation() {
   if (!trainingScreens.length) return;
@@ -324,7 +425,7 @@ function updateScreenNavigation() {
   [...screenDots.children].forEach((dot, index) => dot.classList.toggle('active', index <= activeScreen));
   previousScreen.disabled = activeScreen === 0;
   nextScreen.disabled = activeScreen === trainingScreens.length - 1;
-  const rtl = document.documentElement.dir === 'rtl';
+  const rtl = currentLanguage === 'he';
   previousScreen.textContent = rtl ? '→' : '←';
   nextScreen.textContent = rtl ? '←' : '→';
   const labelPath = trainingScreens[activeScreen].dataset.screenLabel;
@@ -339,6 +440,7 @@ function showScreen(index, direction = 1, instant = false) {
   activeScreen = target;
   const screen = trainingScreens[activeScreen];
   screen.classList.add('is-active');
+  quizReviewReturn.hidden = reviewTargetIndex === null || activeScreen !== reviewTargetIndex;
   if (!instant) screen.classList.add(direction >= 0 ? 'from-next' : 'from-previous');
   updateScreenNavigation();
 }
@@ -363,7 +465,7 @@ document.addEventListener('touchstart', (event) => {
   const touch = event.touches[0];
   touchStartX = touch.clientX;
   touchStartY = touch.clientY;
-  touchStartedOnControl = Boolean(event.target.closest('button,a,input,select,textarea,.quiz,.scenario-quiz'));
+  touchStartedOnControl = Boolean(event.target.closest('button,a,input,select,textarea,[role="button"],[contenteditable="true"],.language-menu,.language-gate'));
 }, { passive:true });
 
 document.addEventListener('touchend', (event) => {
@@ -371,10 +473,16 @@ document.addEventListener('touchend', (event) => {
   const touch = event.changedTouches[0];
   const deltaX = touch.clientX - touchStartX;
   const deltaY = touch.clientY - touchStartY;
-  if (Math.abs(deltaX) < 60 || Math.abs(deltaX) < Math.abs(deltaY) * 1.3) return;
+  if (Math.abs(deltaX) < 60 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.2) return;
   const rtl = document.documentElement.dir === 'rtl';
   const moveNext = rtl ? deltaX > 0 : deltaX < 0;
   showScreen(activeScreen + (moveNext ? 1 : -1), moveNext ? 1 : -1);
+}, { passive:true });
+
+document.addEventListener('touchcancel', () => {
+  touchStartX = 0;
+  touchStartY = 0;
+  touchStartedOnControl = false;
 }, { passive:true });
 
 trainingScreens.forEach(() => screenDots.append(document.createElement('i')));

@@ -56,7 +56,7 @@
       </div>
     </section>
 
-    <section class="section reveal training-screen" id="ready" data-step-key="ready" data-training-screen data-screen-label="sections.ready.step">
+    <section class="section reveal training-screen" id="ready-to-pack" data-step-key="ready" data-training-screen data-screen-label="sections.ready.step">
       <div class="wrap">
         <p class="step" data-i18n="sections.ready.step"></p>
         <h2 data-i18n="sections.ready.title"></h2>
@@ -79,7 +79,7 @@
       </div>
     </section>
 
-    <section class="section section--dark reveal training-screen" data-step-key="number" data-training-screen data-screen-label="sections.number.step">
+    <section class="section section--dark reveal training-screen" id="check-number" data-step-key="number" data-training-screen data-screen-label="sections.number.step">
       <div class="wrap">
         <p class="step" data-i18n="sections.number.step"></p>
         <h2 data-i18n="sections.number.title"></h2>
@@ -92,7 +92,7 @@
       </div>
     </section>
 
-    <section class="section reveal training-screen" data-step-key="writing" data-training-screen data-screen-label="sections.writing.step">
+    <section class="section reveal training-screen" id="write-clearly" data-step-key="writing" data-training-screen data-screen-label="sections.writing.step">
       <div class="wrap">
         <p class="step" data-i18n="sections.writing.step"></p>
         <h2 data-i18n="sections.writing.title"></h2>
@@ -113,7 +113,7 @@
       </div>
     </section>
 
-    <section class="section section--blue reveal training-screen" data-step-key="visible" data-training-screen data-screen-label="sections.visible.step">
+    <section class="section section--blue reveal training-screen" id="number-visible" data-step-key="visible" data-training-screen data-screen-label="sections.visible.step">
       <div class="wrap">
         <p class="step" data-i18n="sections.visible.step"></p>
         <h2 data-i18n="sections.visible.title"></h2>
@@ -123,10 +123,25 @@
           <figure class="comparison comparison--right"><figcaption data-i18n="labels.after"></figcaption><img src="./photo-5.jpg" alt="" data-i18n-alt="photos.flat"></figure>
         </div>
         <p class="photo-rule" data-i18n="sections.visible.rule"></p>
+        <p class="muted practical-tip" data-i18n="sections.visible.tip"></p>
       </div>
     </section>
 
-    <section class="section reveal training-screen" data-step-key="together" data-training-screen data-screen-label="sections.together.step">
+    <section class="section reveal training-screen" id="customer-name" data-step-key="customerName" data-training-screen data-screen-label="sections.customerName.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.customerName.step"></p>
+        <h2 data-i18n="sections.customerName.title"></h2>
+        <p class="lead" data-i18n="sections.customerName.lead"></p>
+        <div class="photo-grid real-photo-pair new-rule-comparison customer-name-comparison">
+          <figure class="comparison comparison--wrong"><figcaption data-i18n="labels.before"></figcaption><img class="customer-name-before" src="./photo_2_2026-08-09_01-27-36.jpg" alt="" data-i18n-alt="photos.customerNameBefore"></figure>
+          <figure class="comparison comparison--right"><figcaption data-i18n="labels.after"></figcaption><img class="customer-name-after" src="./photo_3_2026-08-09_01-27-36.jpg" alt="" data-i18n-alt="photos.customerNameAfter"></figure>
+        </div>
+        <p class="muted" data-i18n="sections.customerName.detail"></p>
+        <p class="photo-rule playful-note" data-i18n="sections.customerName.playful"></p>
+      </div>
+    </section>
+
+    <section class="section reveal training-screen" id="keep-order-together" data-step-key="together" data-training-screen data-screen-label="sections.together.step">
       <div class="wrap">
         <p class="step" data-i18n="sections.together.step"></p>
         <h2 data-i18n="sections.together.title"></h2>
@@ -139,16 +154,21 @@
       </div>
     </section>
 
-    <section class="section reveal training-screen" data-step-key="together" data-training-screen data-screen-label="sections.together.step">
+    <section class="section reveal training-screen" id="fridge-full" data-step-key="together" data-training-screen data-screen-label="sections.together.step">
       <div class="wrap">
         <p class="step" data-i18n="sections.together.step"></p>
         <h2 data-i18n="sections.together.title"></h2>
         <ul class="rules"><li><i>1</i><span data-i18n="sections.together.rule1"></span></li><li><i>2</i><span data-i18n="sections.together.rule2"></span></li></ul>
-        <div class="cold-rule"><span>❄️</span><strong data-i18n="sections.together.cold"></strong></div>
+        <div class="fridge-exception">
+          <h3 data-i18n="sections.together.fridgeFull"></h3>
+          <div class="fridge-flow"><strong data-i18n="sections.together.coldBag"></strong><b aria-hidden="true">→</b><span data-i18n="sections.together.fridge"></span></div>
+          <div class="fridge-flow"><strong data-i18n="sections.together.restOrder"></strong><b aria-hidden="true">→</b><span data-i18n="sections.together.crate"></span></div>
+          <p data-i18n="sections.together.exception"></p>
+        </div>
       </div>
     </section>
 
-    <section class="section section--dark reveal training-screen" data-step-key="done" data-training-screen data-screen-label="sections.done.step">
+    <section class="section section--dark reveal training-screen" id="finished-order" data-step-key="done" data-training-screen data-screen-label="sections.done.step">
       <div class="wrap">
         <p class="step" data-i18n="sections.done.step"></p>
         <div class="not-equal"><span data-i18n="sections.done.packed"></span><b>≠</b><span data-i18n="sections.done.done"></span></div>
@@ -167,7 +187,7 @@
       </div>
     </section>
 
-    <section class="section reveal training-screen" data-step-key="carts" data-training-screen data-screen-label="sections.carts.step">
+    <section class="section reveal training-screen" id="carts" data-step-key="carts" data-training-screen data-screen-label="sections.carts.step">
       <div class="wrap">
         <p class="step" data-i18n="sections.carts.step"></p>
         <h2 data-i18n="sections.carts.title"></h2>
@@ -178,7 +198,7 @@
       </div>
     </section>
 
-    <section class="section section--sand reveal training-screen" data-step-key="water" data-training-screen data-screen-label="sections.water.step">
+    <section class="section section--sand reveal training-screen" id="water" data-step-key="water" data-training-screen data-screen-label="sections.water.step">
       <div class="wrap">
         <p class="step" data-i18n="sections.water.step"></p>
         <h2 data-i18n="sections.water.title"></h2>
@@ -191,7 +211,19 @@
       </div>
     </section>
 
-    <section class="section reveal training-screen" data-step-key="listen" data-training-screen data-screen-label="sections.listen.step">
+    <section class="section section--sand reveal training-screen" id="diapers" data-step-key="diapers" data-training-screen data-screen-label="sections.diapers.step">
+      <div class="wrap">
+        <p class="step" data-i18n="sections.diapers.step"></p>
+        <h2 data-i18n="sections.diapers.title"></h2>
+        <p class="lead" data-i18n="sections.diapers.lead"></p>
+        <div class="photo-grid real-photo-pair new-rule-comparison diaper-comparison">
+          <figure class="comparison comparison--wrong"><figcaption data-i18n="labels.wrong"></figcaption><img class="diaper-wrong" src="./photo_1_2026-08-09_01-27-36.jpg" alt="" data-i18n-alt="photos.diaperWrong"></figure>
+          <figure class="comparison comparison--right"><figcaption data-i18n="labels.right"></figcaption><img class="diaper-right" src="./photo_4_2026-08-09_01-27-36.jpg" alt="" data-i18n-alt="photos.diaperRight"></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal training-screen" id="listen-help" data-step-key="listen" data-training-screen data-screen-label="sections.listen.step">
       <div class="wrap">
         <p class="step" data-i18n="sections.listen.step"></p>
         <h2 data-i18n="sections.listen.title"></h2>
@@ -228,11 +260,15 @@
           <div class="scenario-quiz__progress"><span id="questionCount"></span><span id="quizScore"></span></div>
           <div class="scenario-quiz__bar"><span id="quizProgress"></span></div>
           <div id="questionPanel"><h3 id="questionText"></h3><div class="scenario-answers" id="scenarioAnswers"></div><div class="answer-feedback" id="answerFeedback" aria-live="polite"></div><button class="next-question" id="nextQuestion" type="button"></button></div>
-          <div class="quiz-complete" id="quizComplete" hidden><strong id="finalScore"></strong><h3 data-i18n="knowledge.ready"></h3><div id="missedRules"></div></div>
+          <div class="quiz-complete" id="quizComplete" hidden><strong id="finalScore"></strong><h3 data-i18n="knowledge.ready"></h3><p class="perfect-score-message" id="perfectScoreMessage" hidden></p><div id="missedRules"></div></div>
         </div>
       </div>
     </section>
   </main>
+  <aside class="quiz-review-return" id="quizReviewReturn" hidden>
+    <span id="quizReviewContext"></span>
+    <button id="backToQuizResults" type="button"></button>
+  </aside>
   <nav class="step-nav" id="stepNav" aria-label="Training navigation">
     <button class="step-nav__button" id="previousScreen" type="button" aria-label="Previous screen">←</button>
     <div class="step-nav__progress"><span id="screenCount"></span><div id="screenDots" aria-hidden="true"></div></div>
