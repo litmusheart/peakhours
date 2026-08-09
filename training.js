@@ -266,6 +266,7 @@ const quizComplete = document.querySelector('#quizComplete');
 const finalScore = document.querySelector('#finalScore');
 const missedRules = document.querySelector('#missedRules');
 const perfectScoreMessage = document.querySelector('#perfectScoreMessage');
+const completionHeading = document.querySelector('#quizComplete h3');
 
 const reviewSections = {
   'ready-to-pack': { titlePath:'sections.ready.step' },
@@ -410,10 +411,12 @@ function renderCompletion() {
   finalScore.textContent = `${score}/${copy.questions.length}`;
   missedRules.replaceChildren();
   const isPerfect = score === copy.questions.length;
+  const resultMessage = score >= 10 ? copy.ready : score >= 7 ? copy.almost : copy.reviewGuide;
+  setLocalizedText(completionHeading, resultMessage);
   perfectScoreMessage.hidden = !isPerfect;
   perfectScoreMessage.textContent = isPerfect ? copy.perfect : '';
   if (isPerfect) playPerfectScoreCelebration();
-  if (!isPerfect) {
+  if (missed.length) {
     const heading = document.createElement('p');
     heading.className = 'missed-rules__heading';
     heading.textContent = copy.review;
