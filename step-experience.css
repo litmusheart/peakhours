@@ -260,3 +260,38 @@ html,body{height:100%;overflow:hidden}
   #handwriting-quiz-screen{padding-top:56px}
   #numberQuiz .handwriting-quiz-instruction{margin-top:16px}
 }
+
+/* Slide 5 status icons are fixed card decoration, never bidi content. */
+.slide-5 .example-card{
+  position:relative;
+}
+.slide-5 .example-status{
+  position:absolute;
+  z-index:1;
+  top:12px;
+  right:14px;
+  left:auto;
+  display:grid;
+  width:1.2em;
+  height:1.2em;
+  place-items:center;
+  direction:ltr;
+  font-size:1.5rem;
+  line-height:1;
+  pointer-events:none;
+  unicode-bidi:isolate;
+}
+.slide-5 .example-text{
+  box-sizing:border-box;
+  padding-right:2.5rem;
+}
+.slide-5 .number,
+.slide-5 .number-example{
+  direction:ltr;
+  unicode-bidi:isolate;
+}
+html[lang="he"] .slide-5 .example-text{
+  direction:rtl;
+  text-align:right;
+  unicode-bidi:isolate;
+}
