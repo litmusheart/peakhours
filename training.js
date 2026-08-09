@@ -93,6 +93,33 @@ function chooseLanguage(language) {
   document.body.classList.remove('language-locked');
 }
 
+function setLocalizedText(element, value) {
+  const leadingSymbol = value.match(/^([✓×])\s+(.+)$/u);
+  const trailingSymbol = value.match(/^(.+?)\s+([✓×])$/u);
+  if (!leadingSymbol && !trailingSymbol) {
+    element.textContent = value;
+    return;
+  }
+  const group = document.createElement('span');
+  group.className = 'localized-symbol-label';
+  const icon = document.createElement('span');
+  icon.className = 'localized-symbol-label__icon';
+  icon.setAttribute('aria-hidden', 'true');
+  const text = document.createElement('span');
+  text.className = 'localized-symbol-label__text';
+  text.dir = currentLanguage === 'he' ? 'rtl' : 'ltr';
+  if (leadingSymbol) {
+    icon.textContent = leadingSymbol[1];
+    text.textContent = leadingSymbol[2];
+    group.append(icon, text);
+  } else {
+    text.textContent = trailingSymbol[1];
+    icon.textContent = trailingSymbol[2];
+    group.append(text, icon);
+  }
+  element.replaceChildren(group);
+}
+
 function applyLanguage(language) {
   currentLanguage = translations[language] ? language : 'en';
   const copy = translations[currentLanguage];
@@ -101,7 +128,7 @@ function applyLanguage(language) {
   document.title = `${copy.hero.peak} ${copy.hero.hours}`;
   document.querySelectorAll('[data-i18n]').forEach((element) => {
     const value = getValue(copy, element.dataset.i18n);
-    if (typeof value === 'string') element.textContent = value;
+    if (typeof value === 'string') setLocalizedText(element, value);
   });
   document.querySelectorAll('[data-i18n-alt]').forEach((element) => {
     const value = getValue(copy, element.dataset.i18nAlt);
@@ -168,7 +195,10 @@ function renderChecklist() {
     const li = document.createElement('li');
     const icon = document.createElement('i');
     icon.textContent = '✓';
-    li.append(icon, document.createTextNode(item));
+    icon.setAttribute('aria-hidden', 'true');
+    const text = document.createElement('span');
+    text.textContent = item;
+    li.append(icon, text);
     (index < 4 ? list : moreList).append(li);
   });
 }
