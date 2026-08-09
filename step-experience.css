@@ -70,6 +70,80 @@ html,body{height:100%;overflow:hidden}
   .step-nav__button:disabled{visibility:hidden;opacity:0;pointer-events:none}
   .step-nav__progress{width:min(100%,220px);justify-self:center;padding:8px 12px;border:1px solid rgba(16,35,43,.12);border-radius:18px;background:rgba(255,255,255,.94);box-shadow:0 5px 20px rgba(16,35,43,.14);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 }
+
+/* Keep Hebrew icon labels together in their natural RTL order without
+   changing the direction of scores, order numbers, or other page content. */
+[lang="he"] .localized-symbol-label {
+  direction: rtl;
+  flex-direction: row;
+  unicode-bidi: isolate;
+}
+
+[lang="he"] .localized-symbol-label__text {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+[lang="he"] .localized-symbol-label__icon {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+[lang="he"] .comparison figcaption {
+  direction: rtl;
+  align-items: center;
+}
+
+[lang="he"] .checklist li {
+  direction: rtl;
+  flex-direction: row !important;
+  unicode-bidi: isolate;
+}
+
+[lang="he"] .checklist li > i {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+[lang="he"] .checklist li > span {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+[lang="he"] .ready-flow__success {
+  direction: rtl;
+  flex-direction: row;
+  unicode-bidi: isolate;
+}
+
+[lang="he"] .ready-flow__success > strong {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+[lang="he"] .ready-flow__success > b {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+[lang="he"] .answer-feedback {
+  direction: rtl;
+  unicode-bidi: isolate;
+  text-align: right;
+}
+
+[lang="he"] .number-permutations,
+[lang="he"] .number-correct,
+[lang="he"] .number-wrong-group,
+[lang="he"] .number-correct > b,
+[lang="he"] .number-wrong-group > div,
+[lang="he"] .number-correct > strong,
+[lang="he"] .number-wrong-group > strong,
+[lang="he"] .quiz-complete > strong,
+[lang="he"] .scenario-quiz__progress b {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
 @media(max-height:720px){
   .training-screen.section,.training-screen.introduction,.training-screen.knowledge-check{padding-top:64px;padding-bottom:calc(70px + env(safe-area-inset-bottom))}
   .training-screen.section h2,.training-screen.knowledge-check h2{margin-bottom:11px;font-size:clamp(1.75rem,8.5vw,2.7rem)}

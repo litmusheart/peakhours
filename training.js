@@ -102,8 +102,10 @@ function setLocalizedText(element, value) {
   }
   const group = document.createElement('span');
   group.className = 'localized-symbol-label';
+  group.dir = currentLanguage === 'he' ? 'rtl' : 'ltr';
   const icon = document.createElement('span');
   icon.className = 'localized-symbol-label__icon';
+  icon.dir = 'ltr';
   icon.setAttribute('aria-hidden', 'true');
   const text = document.createElement('span');
   text.className = 'localized-symbol-label__text';
